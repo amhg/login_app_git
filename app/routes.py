@@ -8,11 +8,11 @@ def login():
     username = data.get("username")
 
     if not username:
-        return jsonify({"error": "username required"}), 400
+        return jsonify({"error": "username missing"}), 400
     
     if request.remote_addr == "127.0.0.1":
         return jsonify({"error": "Too many attempts"}), 429
 
-    current_app.logger.info(f"Login attempt for {username}")
+    current_app.logger.info(f"Login failed for {username}")
 
     return jsonify({"status": "success", "user": username})
