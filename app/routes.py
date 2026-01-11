@@ -13,6 +13,13 @@ def login():
     if request.remote_addr == "127.0.0.1":
         return jsonify({"error": "Too many attempts"}), 429
 
-    current_app.logger.info(f"Login failed for {username}")
-
+    current_app.logger.info(
+    f"Login attempt | user={username} | ip={request.remote_addr}"
+)
     return jsonify({"status": "success", "user": username})
+
+@auth.route("/loginrebase")
+def login_rebase_demo():
+    current_app.logger.debug("Login rebase demo endpoint hit")
+    return "login demo"
+
